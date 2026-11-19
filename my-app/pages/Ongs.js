@@ -1,12 +1,11 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
 import { Appbar } from 'react-native-paper';
-import { ImageBackground } from 'react-native-web';
 
 export default function Ongs() {
 
     return (
 
-        <View>
+        <View style={styles.container}>
             <Appbar.Header style={styles.appbar}>
                 {/* <Appbar.BackAction onPress={() => { }} /> */}
                 <Image 
@@ -21,8 +20,8 @@ export default function Ongs() {
 
             <ImageBackground
                 source={require('./../assets/ONGSFundo.png')}
-                resizeMode="strech"
-                
+                resizeMode="cover"
+                imageStyle={styles.image}
                 style={styles.imagemFundo}
             >
                 <Text>wewe</Text>
@@ -33,6 +32,11 @@ export default function Ongs() {
 
 const styles = StyleSheet.create({
 
+    container:{
+
+        flex:1
+
+    },
     appbar:{
 
         padding:0,
@@ -52,9 +56,19 @@ const styles = StyleSheet.create({
     imagemFundo:{
 
         flex:1,
+        width: '100%',
         alignItems:'center',
         alignContent:'center',
         justifyContent:'center',
-        backgroundColor:"#fff26a"
+        backgroundColor:"#fff26a",
+        margin: 0,
+        paddingBottom:20
+    },
+
+    image:{
+
+        width:'100%',
+        height:'40%'
+
     }
 })
