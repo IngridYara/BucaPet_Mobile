@@ -3,9 +3,11 @@ import { Searchbar } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
 const SearchbarComponent = () => {
+
   const [searchQuery, setSearchQuery] = React.useState('');
 
   return (
+    
     <Searchbar
       placeholder="Pesquisar ONGs"
       placeholderTextColor={"#616161"}

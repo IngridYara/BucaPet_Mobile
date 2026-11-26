@@ -33,6 +33,7 @@ const PERGUNTAS = [
 ];
 
 export default function FormCadastroOng({ onEnviar }) {
+  
   const [menuAberto, setMenuAberto] = useState(false);
   const { width: larguraTela } = useWindowDimensions();
   const [etapa, setEtapa] = useState(0);
@@ -77,6 +78,7 @@ export default function FormCadastroOng({ onEnviar }) {
   };
 
   return (
+
     <View style={styles.card}>
       <Text style={styles.parte}>Parte {etapa + 1} de 2</Text>
 
@@ -298,8 +300,10 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "#d9480f",
+    fontWeight:"bold",
     fontSize: 13,
     marginBottom: 4,
+    paddingTop:5
   },
   input: {
     backgroundColor: "#fff",

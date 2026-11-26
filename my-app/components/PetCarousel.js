@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import CardPet from './CardPet'
-import { colors } from '../theme/colors'
+import { useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import CardPet from "./CardPet";
+import { colors } from "../theme/colors";
 
 export default function PetCarousel({ pets }) {
-  const [ativo, setAtivo] = useState(0)
+
+  const [ativo, setAtivo] = useState(0);
+
   return (
+
     <View>
       <FlatList
         horizontal
@@ -16,19 +19,42 @@ export default function PetCarousel({ pets }) {
         renderItem={({ item }) => <CardPet pet={item} variante="compacto" />}
         snapToInterval={160}
         decelerationRate="fast"
-        onScroll={(e) => setAtivo(Math.min(pets.length - 1, Math.round(e.nativeEvent.contentOffset.x / 160)))}
+        onScroll={(e) =>
+          setAtivo(
+            Math.min(
+              pets.length - 1,
+              Math.round(e.nativeEvent.contentOffset.x / 160)
+            )
+          )
+        }
         scrollEventThrottle={16}
       />
       <View style={styles.dots}>
         {pets.map((p, i) => (
-          <View key={p.id} style={[styles.dot, i === ativo && styles.dotAtivo]} />
+          <View
+            key={p.id}
+            style={[styles.dot, i === ativo && styles.dotAtivo]}
+          />
         ))}
       </View>
     </View>
-  )
+  );
 }
 const styles = StyleSheet.create({
-  dots: { flexDirection: 'row', justifyContent: 'center', gap: 8, marginTop: 12 },
-  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.cinzaBorda },
-  dotAtivo: { backgroundColor: colors.laranja },
-})
+
+  dots: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 8,
+    marginTop: 12,
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.cinzaBorda,
+  },
+  dotAtivo: { 
+    backgroundColor: colors.laranja 
+  },
+});

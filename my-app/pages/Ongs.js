@@ -15,21 +15,9 @@ import SearchbarComponent from "./../components/Searchbar";
 import ButtonComponent from "./../components/Button";
 import CardOngs from "./../components/CardOngs";
 import FormCadastroOng from "./../components/FormCadastroOngs";
-
-const ALTURA_PARALLAX = 200;
-const DESLOCAMENTO = 40;
+import ParallaxComponent from "../components/Parralax";
 
 export default function Ongs() {
-
-  const { height: alturaTela } = useWindowDimensions();
-  const scrollY = useRef(new Animated.Value(0)).current;
-  const [parallaxY, setParallaxY] = useState(0);
-
-  const translateY = scrollY.interpolate({
-    inputRange: [parallaxY - alturaTela, parallaxY + ALTURA_PARALLAX],
-    outputRange: [-DESLOCAMENTO, DESLOCAMENTO],
-    extrapolate: "clamp",
-  });
 
   const dados = [
     {
@@ -119,6 +107,8 @@ export default function Ongs() {
     </View>
   );
 
+  const scrollY = useRef(new Animated.Value(0)).current;
+
   return (
 
     <Animated.ScrollView
@@ -134,7 +124,7 @@ export default function Ongs() {
 
         <Appbar.Header style={styles.appbar}>
           <Image
-            source={require("./../assets/logo.png")}
+            source={require("./../assets/img/logo.png")}
             resizeMode="contain"
             style={styles.logo}
           />
@@ -143,7 +133,7 @@ export default function Ongs() {
         </Appbar.Header>
 
         <ImageBackground
-          source={require("./../assets/ONGSFundo.png")}
+          source={require("./../assets/img/ONGSFundo.png")}
           resizeMode="cover"
           style={styles.imagemFundo}
         >
@@ -184,20 +174,7 @@ export default function Ongs() {
         />
       </View>
 
-      <View style={styles.parallax}
-        onLayout={(e) => setParallaxY(e.nativeEvent.layout.y)}
-      >
-        <Animated.Image
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbvAkIl2guHMd5PY3ayEsMjMlC7GA83w0HV4LjCBtd7g&s=10",
-          }}
-          resizeMode="cover"
-          style={[styles.parallaxImagem, { transform: [{ translateY }] }]}
-        />
-        <View style={styles.parallaxOverlay}>
-          <Text style={styles.parallaxTexto}>Conheça essas maravilhas</Text>
-        </View>
-      </View>
+      <ParallaxComponent uri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbvAkIl2guHMd5PY3ayEsMjMlC7GA83w0HV4LjCBtd7g&s=10" texto="Conheça essas maravilhas" scrollY={scrollY}/>
 
       <View style={styles.secaoDisponiveis}>
         <Text style={styles.tituloDisponiveis}>
@@ -272,28 +249,6 @@ const styles = StyleSheet.create({
   secaoOngs: {
     padding: 20,
   },
-  parallax: {
-    height: ALTURA_PARALLAX,
-    overflow: "hidden",
-  },
-  parallaxImagem: {
-    position: "absolute",
-    top: -DESLOCAMENTO,
-    width: "100%",
-    height: ALTURA_PARALLAX + DESLOCAMENTO * 2,
-  },
-  parallaxOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.25)",
-    paddingBottom: 12,
-  },
-  parallaxTexto: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
   secaoDisponiveis: {
     backgroundColor: "#3f3f3f",
     padding: 20,
@@ -333,7 +288,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   tituloCadastro: {
-    color: "#fcdf00",
+    color: "#060602",
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center",
